@@ -371,4 +371,4 @@ const char *telnet_subnegotiation_name(telnet_subnegotiation_t subnegotiation);
 const char *telnet_command_name(uint8_t command);
 
 // End of telnet commands
-#endif // TELNET_H
+#endif // EMBEDDED_TELNET_H
