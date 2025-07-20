@@ -1,5 +1,5 @@
-#ifndef TELNET_H
-#define TELNET_H
+#ifndef EMBEDDED_TELNET_H
+#define EMBEDDED_TELNET_H
 
 /*
 Copyright (c) 2025 Andrew C. Young <andrew@vaelen.org>
