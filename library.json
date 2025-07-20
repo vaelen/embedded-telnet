@@ -1,0 +1,40 @@
+{
+  "name": "embedded-telnet",
+  "version": "0.1.0",
+  "description": "A library for properly handling the telnet protocol in embedded systems. It supports telnet protocol negotiation for both clients and servers, can be used with the networking package of your choice, and does not require dynamic memory allocation.",
+  "keywords": "telnet",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/vaelen/embedded-telnet.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Andrew C. Young",
+      "email": "andrew@vaelen.org",
+      "url": "https://vaelen.org",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/vaelen/embedded-telnet",
+  "dependencies": {},
+  "frameworks": "*",
+  "platforms": "*",
+  "build": {
+    "includeDir": "include",
+    "srcDir": "src",
+    "srcFilter": "+<*> -<tests/>"
+  },
+  "export": {
+    "include": [
+      "include",
+      "src",
+      "examples",
+      "library.json",
+      "README.md",
+      "LICENSE"
+    ]
+  }
+}

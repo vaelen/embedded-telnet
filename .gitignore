@@ -53,3 +53,8 @@ dkms.conf
 
 # debug information files
 *.dwo
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/extensions.json
+.pio
+build
