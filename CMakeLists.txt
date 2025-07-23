@@ -3,6 +3,12 @@
 # MIT License
 
 cmake_minimum_required(VERSION 3.15)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wpedantic -Werror")
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
+
 project(EmbeddedTelnet VERSION 0.1.0 
   DESCRIPTION "Embedded Telnet Protocol Library"
   HOMEPAGE_URL "https://github.com/vaelen/embedded-telnet"

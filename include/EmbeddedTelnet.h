@@ -116,97 +116,89 @@ extern "C" {
 */
 
 // Telnet commands
-typedef enum {
-  TELNET_SE   = 240, /* 0xF0 Subnegotiation End */
-  TELNET_NOP  = 241, /* 0xF1 No Operation */
-  TELNET_DM   = 242, /* 0xF2 Data Mark */
-  TELNET_BRK  = 243, /* 0xF3 Break */
-  TELNET_IP   = 244, /* 0xF4 Interrupt Process */
-  TELNET_AO   = 245, /* 0xF5 Abort Output */
-  TELNET_AYT  = 246, /* 0xF6 Are You There? */
-  TELNET_EC   = 247, /* 0xF7 Erase Character */
-  TELNET_EL   = 248, /* 0xF8 Erase Line */
-  TELNET_GA   = 249, /* 0xF9 Go Ahead */
-  TELNET_SB   = 250, /* 0xFA Subnegotiation */
-  TELNET_WILL = 251, /* 0xFB Sender says it can handle option */
-  TELNET_WONT = 252, /* 0xFC Receiver cannot handle option */
-  TELNET_DO   = 253, /* 0xFD Sender asks for option support */
-  TELNET_DONT = 254, /* 0xFE Receiver can't support option */
-  TELNET_IAC  = 255  /* 0xFF Interpret As Command */
-} telnet_command_t;
+#define TELNET_SE    240 /* 0xF0 Subnegotiation End */
+#define TELNET_NOP   241 /* 0xF1 No Operation */
+#define TELNET_DM    242 /* 0xF2 Data Mark */
+#define TELNET_BRK   243 /* 0xF3 Break */
+#define TELNET_IP    244 /* 0xF4 Interrupt Process */
+#define TELNET_AO    245 /* 0xF5 Abort Output */
+#define TELNET_AYT   246 /* 0xF6 Are You There? */
+#define TELNET_EC    247 /* 0xF7 Erase Character */
+#define TELNET_EL    248 /* 0xF8 Erase Line */
+#define TELNET_GA    249 /* 0xF9 Go Ahead */
+#define TELNET_SB    250 /* 0xFA Subnegotiation */
+#define TELNET_WILL  251 /* 0xFB Sender says it can handle option */
+#define TELNET_WONT  252 /* 0xFC Receiver cannot handle option */
+#define TELNET_DO    253 /* 0xFD Sender asks for option support */
+#define TELNET_DONT  254 /* 0xFE Receiver can't support option */
+#define TELNET_IAC   255 /* 0xFF Interpret As Command */
+typedef int telnet_command_t;
 
-typedef enum {
-  TELNET_SE_IS = 0,
-  TELNET_SE_SEND = 1
-} telnet_subnegotiation_t;
+#define TELNET_SE_IS   0
+#define TELNET_SE_SEND 1
+typedef int telnet_subnegotiation_t;
 
-typedef enum {
-  TELNET_OPTION_BINARY                = 0,   /* 0x00 - RFC 856 */
-  TELNET_OPTION_ECHO                  = 1,   /* 0x01 - RFC 857 */
-  TELNET_OPTION_RECONNECTION          = 2,   /* 0x02 - NIC 15391 of 1973 */
-  TELNET_OPTION_SUPPRESS_GO_AHEAD     = 3,   /* 0x03 - RFC 858 */
-  TELNET_OPTION_MSG_SIZE              = 4,   /* 0x04 - NIC 15393 of 1973 */
-  TELNET_OPTION_STATUS                = 5,   /* 0x05 - RFC 859 */
-  TELNET_OPTION_TIMING_MARK           = 6,   /* 0x06 - RFC 860 */
-  TELNET_OPTION_RCTE                  = 7,   /* 0x07 - RFC 726 */
-  TELNET_OPTION_OUTPUT_LINE_WIDTH     = 8,   /* 0x08 - NIC 20196 of 1978 */
-  TELNET_OPTION_OUTPUT_PAGE_SIZE      = 9,   /* 0x09 - NIC 20197 of 1978 */
-  TELNET_OPTION_OUTPUT_CR_DISPOSITION = 10,  /* 0x0A - RFC 652 */
-  TELNET_OPTION_OUTPUT_HORIZONTAL_TAB = 11,  /* 0x0B - RFC 653 */
-  TELNET_OPTION_OUTPUT_HORIZ_TAB_DISP = 12,  /* 0x0C - RFC 654 */
-  TELNET_OPTION_OUTPUT_FORM_FEED      = 13,  /* 0x0D - RFC 655 */
-  TELNET_OPTION_OUTPUT_VERTICAL_TAB   = 14,  /* 0x0E - RFC 656 */
-  TELNET_OPTION_OUTPUT_VERT_TAB_DISP  = 15,  /* 0x0F - RFC 657 */
-  TELNET_OPTION_OUTPUT_LINE_FEED      = 16,  /* 0x10 - RFC 658 */
-  TELNET_OPTION_EXTENDED_ASCII        = 17,  /* 0x11 - RFC 698 */
-  TELNET_OPTION_LOGOUT                = 18,  /* 0x12 - RFC 727 */
-  TELNET_OPTION_BYTE_MACRO            = 19,  /* 0x13 - RFC 735 */
-  TELNET_OPTION_DATA_ENTRY            = 20,  /* 0x14 - RFC 1043 / RFC 732 */
-  TELNET_OPTION_SUPDUP                = 21,  /* 0x15 - RFC 736 / RFC 734 */
-  TELNET_OPTION_SUPDUP_OUTPUT         = 22,  /* 0x16 - RFC 749 */
-  TELNET_OPTION_SEND_LOCATION         = 23,  /* 0x17 - RFC 779 */
-  TELNET_OPTION_TERMINAL_TYPE         = 24,  /* 0x18 - RFC 1091 */
-  TELNET_OPTION_END_OF_RECORD         = 25,  /* 0x19 - RFC 885 */
-  TELNET_OPTION_TACACAS               = 26,  /* 0x1A - RFC 927 */
-  TELNET_OPTION_OUTPUT_MARKING        = 27,  /* 0x1B - RFC 933 */
-  TELNET_OPTION_TERMINAL_LOCATION     = 28,  /* 0x1C - RFC 946 */
-  TELNET_OPTION_TN3270                = 29,  /* 0x1D - RFC 1041 */
-  TELNET_OPTION_X3_PAD                = 30,  /* 0x1E - RFC 1053 */
-  TELNET_OPTION_WINDOW_SIZE           = 31,  /* 0x1F - RFC 1073 */
-  TELNET_OPTION_TERMINAL_SPEED        = 32,  /* 0x20 - RFC 1079 */
-  TELNET_OPTION_FLOW_CONTROL          = 33,  /* 0x21 - RFC 1372 */
-  TELNET_OPTION_LINE_MODE             = 34,  /* 0x22 - RFC 1184 */
-  TELNET_OPTION_X_DISPLAY_LOCATION    = 35,  /* 0x23 - RFC 1096 */
-  TELNET_OPTION_ENV                   = 36,  /* 0x24 - RFC 1408 */
-  TELNET_OPTION_AUTHENTICATION        = 37,  /* 0x25 - RFC 2941 */
-  TELNET_OPTION_ENCRYPTION            = 38,  /* 0x26 - RFC 2946 */
-  TELNET_OPTION_NEW_ENVIRON           = 39,  /* 0x27 - RFC 1572 */
-  TELNET_OPTION_TN3270E               = 40,  /* 0x28 - RFC 2355 */
-  TELNET_OPTION_XAUTH                 = 41,  /* 0x29 - No RFC  */
-  TELNET_OPTION_CHARSET               = 42,  /* 0x2A - RFC 2066 */
-  TELNET_OPTION_REMOTE_SERIAL_PORT    = 43,  /* 0x2B - No RFC */
-  TELNET_OPTION_COM_PORT_CONTROL      = 44,  /* 0x2C - RFC 2217 */
-  TELNET_OPTION_SUPPRESS_LOCAL_ECHO   = 45,  /* 0x2D - No RFC*/
-  TELNET_OPTION_START_TLS             = 46,  /* 0x2E - draft-altman-telnet-starttls-02 */
-  TELNET_OPTION_KERMIT                = 47,  /* 0x2F - RFC 2840*/
-  TELNET_OPTION_SEND_URL              = 48,  /* 0x30 - No RFC */
-  TELNET_OPTION_FORWARD_X             = 49   /* 0x31 - No RFC */
-} telnet_option_t;
+#define TELNET_OPTION_BINARY                0   /* 0x00 - RFC 856 */
+#define TELNET_OPTION_ECHO                  1   /* 0x01 - RFC 857 */
+#define TELNET_OPTION_RECONNECTION          2   /* 0x02 - NIC 15391 of 1973 */
+#define TELNET_OPTION_SUPPRESS_GO_AHEAD     3   /* 0x03 - RFC 858 */
+#define TELNET_OPTION_MSG_SIZE              4   /* 0x04 - NIC 15393 of 1973 */
+#define TELNET_OPTION_STATUS                5   /* 0x05 - RFC 859 */
+#define TELNET_OPTION_TIMING_MARK           6   /* 0x06 - RFC 860 */
+#define TELNET_OPTION_RCTE                  7   /* 0x07 - RFC 726 */
+#define TELNET_OPTION_OUTPUT_LINE_WIDTH     8   /* 0x08 - NIC 20196 of 1978 */
+#define TELNET_OPTION_OUTPUT_PAGE_SIZE      9   /* 0x09 - NIC 20197 of 1978 */
+#define TELNET_OPTION_OUTPUT_CR_DISPOSITION 10  /* 0x0A - RFC 652 */
+#define TELNET_OPTION_OUTPUT_HORIZONTAL_TAB 11  /* 0x0B - RFC 653 */
+#define TELNET_OPTION_OUTPUT_HORIZ_TAB_DISP 12  /* 0x0C - RFC 654 */
+#define TELNET_OPTION_OUTPUT_FORM_FEED      13  /* 0x0D - RFC 655 */
+#define TELNET_OPTION_OUTPUT_VERTICAL_TAB   14  /* 0x0E - RFC 656 */
+#define TELNET_OPTION_OUTPUT_VERT_TAB_DISP  15  /* 0x0F - RFC 657 */
+#define TELNET_OPTION_OUTPUT_LINE_FEED      16  /* 0x10 - RFC 658 */
+#define TELNET_OPTION_EXTENDED_ASCII        17  /* 0x11 - RFC 698 */
+#define TELNET_OPTION_LOGOUT                18  /* 0x12 - RFC 727 */
+#define TELNET_OPTION_BYTE_MACRO            19  /* 0x13 - RFC 735 */
+#define TELNET_OPTION_DATA_ENTRY            20  /* 0x14 - RFC 1043 / RFC 732 */
+#define TELNET_OPTION_SUPDUP                21  /* 0x15 - RFC 736 / RFC 734 */
+#define TELNET_OPTION_SUPDUP_OUTPUT         22  /* 0x16 - RFC 749 */
+#define TELNET_OPTION_SEND_LOCATION         23  /* 0x17 - RFC 779 */
+#define TELNET_OPTION_TERMINAL_TYPE         24  /* 0x18 - RFC 1091 */
+#define TELNET_OPTION_END_OF_RECORD         25  /* 0x19 - RFC 885 */
+#define TELNET_OPTION_TACACAS               26  /* 0x1A - RFC 927 */
+#define TELNET_OPTION_OUTPUT_MARKING        27  /* 0x1B - RFC 933 */
+#define TELNET_OPTION_TERMINAL_LOCATION     28  /* 0x1C - RFC 946 */
+#define TELNET_OPTION_TN3270                29  /* 0x1D - RFC 1041 */
+#define TELNET_OPTION_X3_PAD                30  /* 0x1E - RFC 1053 */
+#define TELNET_OPTION_WINDOW_SIZE           31  /* 0x1F - RFC 1073 */
+#define TELNET_OPTION_TERMINAL_SPEED        32  /* 0x20 - RFC 1079 */
+#define TELNET_OPTION_FLOW_CONTROL          33  /* 0x21 - RFC 1372 */
+#define TELNET_OPTION_LINE_MODE             34  /* 0x22 - RFC 1184 */
+#define TELNET_OPTION_X_DISPLAY_LOCATION    35  /* 0x23 - RFC 1096 */
+#define TELNET_OPTION_ENV                   36  /* 0x24 - RFC 1408 */
+#define TELNET_OPTION_AUTHENTICATION        37  /* 0x25 - RFC 2941 */
+#define TELNET_OPTION_ENCRYPTION            38  /* 0x26 - RFC 2946 */
+#define TELNET_OPTION_NEW_ENVIRON           39  /* 0x27 - RFC 1572 */
+#define TELNET_OPTION_TN3270E               40  /* 0x28 - RFC 2355 */
+#define TELNET_OPTION_XAUTH                 41  /* 0x29 - No RFC  */
+#define TELNET_OPTION_CHARSET               42  /* 0x2A - RFC 2066 */
+#define TELNET_OPTION_REMOTE_SERIAL_PORT    43  /* 0x2B - No RFC */
+#define TELNET_OPTION_COM_PORT_CONTROL      44  /* 0x2C - RFC 2217 */
+#define TELNET_OPTION_SUPPRESS_LOCAL_ECHO   45  /* 0x2D - No RFC*/
+#define TELNET_OPTION_START_TLS             46  /* 0x2E - draft-altman-telnet-starttls-02 */
+#define TELNET_OPTION_KERMIT                47  /* 0x2F - RFC 2840*/
+#define TELNET_OPTION_SEND_URL              48  /* 0x30 - No RFC */
+#define TELNET_OPTION_FORWARD_X             49  /* 0x31 - No RFC */
+typedef int telnet_option_t;
 
-#define TELNET_OPTION_MAX 50
+#define TELNET_MAX_OPTIONS 50
 
-/**
- * This enum defines the possible states of a telnet command parser.
- * It is used to track the current state of the parser while processing incoming data.
- */
-typedef enum {
-  TELNET_STATE_READY = 0,
-  TELNET_STATE_IN_COMMAND,
-  TELNET_STATE_IN_OPTION,
-  TELNET_STATE_IN_SUBNEGOTIATION_TYPE,
-  TELNET_STATE_IN_SUBNEGOTIATION_VALUE,
-  TELNET_STATE_IN_SB_IAC
-} telnet_parse_state_t;
+#define TELNET_STATE_READY                    0
+#define TELNET_STATE_IN_COMMAND               1
+#define TELNET_STATE_IN_OPTION                2
+#define TELNET_STATE_IN_SUBNEGOTIATION_TYPE   3
+#define TELNET_STATE_IN_SUBNEGOTIATION_VALUE  4
+#define TELNET_STATE_IN_SB_IAC                5
+typedef int telnet_parse_state_t;
 
 /** 
 * Structure representing a telnet command packet.
@@ -231,7 +223,7 @@ typedef struct {
   telnet_parse_state_t state;
   telnet_packet_t packet;
   uint64_t options;
-  const uint8_t *subnegotiation_options[TELNET_OPTION_MAX];
+  const uint8_t *subnegotiation_options[TELNET_MAX_OPTIONS];
   void *user_data; 
 } telnet_session_t;
 
@@ -375,9 +367,8 @@ const char *telnet_subnegotiation_name(telnet_subnegotiation_t subnegotiation);
 const char *telnet_command_name(uint8_t command);
 
 #if defined(__cplusplus)
-}
+} // extern "C"
 #endif
-
 
 // End of telnet commands
 #endif // EMBEDDED_TELNET_H

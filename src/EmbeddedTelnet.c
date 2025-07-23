@@ -125,9 +125,8 @@ void telnet_supported_options(telnet_session_t *session, telnet_option_t option,
   va_list args;
   va_start(args, option);
   
-  for (telnet_option_t opt = option; opt < TELNET_OPTION_MAX; opt++) {
-    bool supported = _bit_get(session->options, opt);
-    // Do something with the supported option...
+  for (int i = 0; i < option; i++) {
+    _bit_set(session->options, va_arg(args, telnet_option_t));
   }
   
   va_end(args);
@@ -250,6 +249,7 @@ size_t telnet_read(telnet_session_t *session, uint8_t *data, size_t length, teln
   size_t new_length = length;
   for (size_t i = 0; i < new_length; i++) {
     uint8_t c = data[i];
+    
     switch(session->state) {
       case TELNET_STATE_READY:
         if (c == TELNET_IAC) {

@@ -1,7 +1,5 @@
-#include <Arduino.h>
-#include <WiFi.h>
-#include <WiFiServer.h>
-#include <WiFiClient.h>
+#include <unistd.h>
+#include <socket.h>
 
 #include <EmbeddedTelnet.h>
 
