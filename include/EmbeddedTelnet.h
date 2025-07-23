@@ -105,6 +105,10 @@ SOFTWARE.
 * ```
 */
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 /*
 * Telnet commands and options as per RFC 854, RFC 855, and related documents.
 * For more information on Telnet options, see:
@@ -369,6 +373,11 @@ const char *telnet_subnegotiation_name(telnet_subnegotiation_t subnegotiation);
 
 /** Returns a human readable name for a given telnet command */
 const char *telnet_command_name(uint8_t command);
+
+#if defined(__cplusplus)
+}
+#endif
+
 
 // End of telnet commands
 #endif // EMBEDDED_TELNET_H
